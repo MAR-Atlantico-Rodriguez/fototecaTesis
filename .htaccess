@@ -1,0 +1,45 @@
+#AddDefaultCharset utf-8
+#RewriteEngine on
+
+# if a directory or a file exists, use it directly
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+# otherwise forward it to index.php
+#RewriteRule . index.php
+
+
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+    
+
+    RewriteEngine On
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Configure el paquete “ea-php70” como el lenguaje de programación predeterminado “PHP”.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php70 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
