@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,6 +9,8 @@ class Categoria extends Model{
     protected $table = "categorias";
 
     protected $fillable = ['id','id_padre','categoria','id_users','block'];
+
+
     
     public function subcategoria(){
         return $this->hasMany(Categoria::class);
