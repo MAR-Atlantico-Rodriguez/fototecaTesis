@@ -41,7 +41,7 @@ function busquedas(){
                  };
 	
 	$.ajax({
-      url: 'http://fototeca.unne.edu.ar/search',
+      url: 'http://localhost/fototecaTesis/search',
       type: "post",
       data: atributos,
        success: function(data){ // What to do if we succeed
@@ -56,7 +56,7 @@ function busquedas(){
 
 function verGaleria(id){
   $.ajax({
-      url: 'http://fototeca.unne.edu.ar/galeria/'+id,
+      url: 'http://localhost/fototecaTesis/galeria/'+id,
       type: "get",
       data: '',
        success: function(data){ // What to do if we succeed

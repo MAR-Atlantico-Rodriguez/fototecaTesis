@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-use App\Categoria;
-use App\ImagenTags;
+use App\Imagen;
 
 class Imagen extends Model{
 	
@@ -17,8 +16,8 @@ class Imagen extends Model{
 
     //Envia el registro de una imagen mediante el ID 
     public function unaImagen($id){
-    	return DB::table($this->table) 
-                 ->select(DB::raw('users.name, categorias.categoria, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, imagenes.*'))
+        return DB::table($this->table) 
+                ->select(DB::raw('users.name, categorias.categoria, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, imagenes.*'))
                 ->join('users', 'users.id', '=', 'imagenes.id_user')
                 ->join('categorias', 'categorias.id', '=', 'imagenes.id_categoria')
                 ->where('imagenes.id',$id) 
@@ -89,6 +88,18 @@ class Imagen extends Model{
             $query->join('imagen_tags', 'id', '=', 'imagen_tags.id_imagen');
             $query->whereIn('imagen_tags.id_tag',  $tags);
         }
+    }
+
+    //Metodos para API
+    public function imagenes_API($idCategoria = 0){
+        $img = Imagen::select('id','titulo','url')->where('repositorio','=',1)->orderBy('created_at','desc');
+        if($idCategoria > 0){
+            $img->where('id_categoria', $idCategoria);
+        }else{
+            $img->limit(12);
+        }
+
+        return $img->get();
     }
 
 }

@@ -111,17 +111,14 @@ class FototecaController extends Controller{
     }
 
     public function newImagenUP(Request $request){
-        $images = $request->file('image');
-        
+        $images = $request->file('image');        
         $id_categoria = request()->input('idCategoria');
 
-        
         $rules = ['titulo' => 'required|max:200',
                   'fecha' => 'required|date',];
         $messages = [                        
             'titulo.max' => 'El máximo permitido es 200 Catacteres',
             'titulo.required' => 'Coloque un titulo',
-
             'fecha.date' => 'Seleccione una fecha',
             'fecha.required' => 'La fecha es requerida',
         ];
@@ -130,7 +127,6 @@ class FototecaController extends Controller{
          if ($validator->fails()){
             return redirect('newImage/'.request()->input('idCategoria').'/'.$request->input('categoriaSeleccionada'))->withErrors($validator);
         }else{
-
             //$rules = ['image' => 'required|image|max:100024*10024',];
             $rules = ['image' => 'required',];
             $messages = [
@@ -181,7 +177,6 @@ class FototecaController extends Controller{
                     // 0 HORIZONTAL - 1 VERTICAL
                     $vertical_horizontal = ($W_H[0] >= $W_H[1])?0:1;
 
-
                     //Verifico la categoria si existe la CARPETA
                     if(!is_dir(public_path("imagenes/".$id_categoria))){ 
                         //Creo una carpeta para la categoria 
@@ -189,11 +184,9 @@ class FototecaController extends Controller{
                     }
                     
                     //Guardo las imagenes
-                    $img->save($path);//Imagen Web 700PX
-                    $img_th->save($path_th);//Imagen Thumb 255PX
-                    $img_Grande->save($path_G);//Imagen Grande 2100PX
-
-                   
+                    $img->save($path,100);//Imagen Web 700PX
+                    $img_th->save($path_th,100);//Imagen Thumb 255PX
+                    $img_Grande->save($path_G,100);//Imagen Grande 2100PX                   
 
                     //Guardo en Base de datos!
                     $imagen = new Imagen();            
