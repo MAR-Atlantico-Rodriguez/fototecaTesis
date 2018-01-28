@@ -8,9 +8,9 @@ use App\Imagen;
 
 class ImagenesFrontController extends Controller {
 
-    public function imagenes(){
+    public function imagenes($id = 0){
     	$img = new Imagen();
-    	$imagenes = $img->imagenes_API(0)->toArray();
+    	$imagenes = $img->imagenes_API($id)->toArray();
     	return response()->json($imagenes);
     }
 

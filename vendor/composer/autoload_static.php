@@ -358,7 +358,9 @@ class ComposerStaticInitd17ece3fb53781f1b9ae9c50833c6c8c
     public static $classMap = array (
         'App\\Categoria' => __DIR__ . '/../..' . '/app/Categoria.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Estadisticas' => __DIR__ . '/../..' . '/app/Estadisticas.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\ApiControllers\\ImagenesFrontController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiControllers/ImagenesFrontController.php',
         'App\\Http\\Controllers\\ApiControllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiControllers/UserController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -366,6 +368,7 @@ class ComposerStaticInitd17ece3fb53781f1b9ae9c50833c6c8c
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\CategoriasController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoriasController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\EstadisticasController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstadisticasController.php',
         'App\\Http\\Controllers\\FototecaController' => __DIR__ . '/../..' . '/app/Http/Controllers/FototecaController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\TagsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TagsController.php',

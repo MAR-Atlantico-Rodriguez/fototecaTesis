@@ -92,11 +92,13 @@ class Imagen extends Model{
 
     //Metodos para API
     public function imagenes_API($idCategoria = 0){
-        $img = Imagen::select('id','titulo','url')->where('repositorio','=',1)->orderBy('created_at','desc');
+        $img = Imagen::select(DB::raw('imagenes.id, imagenes.titulo, imagenes.descripcion, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, cat.categoria, imagenes.id_categoria'))
+        ->where('repositorio','=',1)
+        ->join('categorias as cat', 'cat.id', '=', 'imagenes.id_categoria');
         if($idCategoria > 0){
-            $img->where('id_categoria', $idCategoria);
+            $img->where('imagenes.id_categoria', $idCategoria)->orderBy('imagenes.created_at','desc');
         }else{
-            $img->limit(12);
+            $img->inRandomOrder()->limit(12);
         }
 
         return $img->get();
