@@ -16,9 +16,9 @@ class SeccionController extends Controller {
     	return response()->json($categorias);
     }
 
-    public function unaCategoria($id = 0){
+    public function imagenesCategoria($id = 0, $tamanioPagina = 0){
     	$img = new Imagen();
-    	$imagenes = $img->imagenes_API($id)->toArray();
+    	$imagenes = $img->imagenesCategoria_API($id, $tamanioPagina)->toArray();
     	return response()->json($imagenes);
     }
 }

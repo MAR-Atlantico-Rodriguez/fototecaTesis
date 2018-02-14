@@ -10,7 +10,7 @@ class ImagenesFrontController extends Controller {
 
     public function imagenes($id = 0){
     	$img = new Imagen();
-    	$imagenes = $img->imagenes_API($id)->toArray();
+    	$imagenes = $img->imagenesInicio_API()->toArray();
     	return response()->json($imagenes);
     }
 

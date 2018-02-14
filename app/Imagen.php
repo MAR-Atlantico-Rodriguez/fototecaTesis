@@ -91,17 +91,22 @@ class Imagen extends Model{
     }
 
     //Metodos para API
-    public function imagenes_API($idCategoria = 0){
-        $img = Imagen::select(DB::raw('imagenes.id, imagenes.titulo, imagenes.descripcion, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, cat.categoria, imagenes.id_categoria'))
-        ->where('repositorio','=',1)
-        ->join('categorias as cat', 'cat.id', '=', 'imagenes.id_categoria');
-        if($idCategoria > 0){
-            $img->where('imagenes.id_categoria', $idCategoria)->orderBy('imagenes.created_at','desc');
-        }else{
-            $img->inRandomOrder()->limit(12);
-        }
+    public function imagenesInicio_API(){
+        return Imagen::select(DB::raw('imagenes.id, imagenes.titulo, imagenes.descripcion, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, cat.categoria, imagenes.id_categoria'))
+            ->where('repositorio','=',1)
+            ->join('categorias as cat', 'cat.id', '=', 'imagenes.id_categoria')
+            ->inRandomOrder()
+            ->limit(12)
+            ->get();
+    }
 
-        return $img->get();
+    public function imagenesCategoria_API($idCategoria = 0, $tamanioPagina = 0) {
+        return  Imagen::select(DB::raw('imagenes.id, imagenes.titulo, imagenes.descripcion, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, cat.categoria, imagenes.id_categoria'))
+            ->join('categorias as cat', 'cat.id', '=', 'imagenes.id_categoria')
+            ->where('repositorio','=',1)
+            ->where('imagenes.id_categoria', $idCategoria)
+            ->orderBy('imagenes.created_at','asc')
+            ->paginate($tamanioPagina);
     }
 
 }
