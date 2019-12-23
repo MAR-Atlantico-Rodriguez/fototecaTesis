@@ -10,6 +10,7 @@ class Categoria extends Model{
 
     protected $fillable = ['id','id_padre','categoria','id_users','block'];
 
+
     
     public function subcategoria(){
         return $this->hasMany(Categoria::class);
@@ -25,10 +26,5 @@ class Categoria extends Model{
 
     static function listaCategoriasProcedure($id){
         return DB::select('CALL categoriasLista('.$id.')');
-    }
-
-    //Metodos para API
-    public function categorias_API(){
-        return DB::select('CALL categoriasImagenes()');
     }
 }

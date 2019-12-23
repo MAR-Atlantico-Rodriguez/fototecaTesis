@@ -76,7 +76,7 @@ class CallbackEvent extends Event
     }
 
     /**
-     * Clear the mutex for the event.
+     * Remove the mutex file from disk.
      *
      * @return void
      */
@@ -90,20 +90,17 @@ class CallbackEvent extends Event
     /**
      * Do not allow the event to overlap each other.
      *
-     * @param  int  $expiresAt
      * @return $this
+     *
+     * @throws \LogicException
      */
-    public function withoutOverlapping($expiresAt = 1440)
+    public function withoutOverlapping()
     {
         if (! isset($this->description)) {
             throw new LogicException(
                 "A scheduled event name is required to prevent overlapping. Use the 'name' method before 'withoutOverlapping'."
             );
         }
-
-        $this->withoutOverlapping = true;
-
-        $this->expiresAt = $expiresAt;
 
         return $this->skip(function () {
             return $this->mutex->exists($this);

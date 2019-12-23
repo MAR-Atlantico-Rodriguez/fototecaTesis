@@ -47,10 +47,16 @@
                             
                             @if (Auth::user()->perfil)
                                 <li>
+                                    <a href="{{url('/')}}">Inicio</a>
+                                </li>
+                                <li>
                                     <a href="{{url('tags/lista')}}">Tags</a>
                                 </li>
                                 <li>
                                     <a href="{{url('categorias/lista/0')}}">Categorias</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('estadistica')}}">Estadisticas</a>
                                 </li>
                                 <li  class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuarios <span class="caret"></span></a>

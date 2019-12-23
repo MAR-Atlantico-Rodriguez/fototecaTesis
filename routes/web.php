@@ -81,6 +81,9 @@ Route::middleware('auth')->group(function(){
 	Route::get('/tags/busqueda','TagsController@busqueda');
 	
 	Route::post('/eliminarTag', 'TagsController@eliminarTag');
+
+	//Estadisticas descargas
+	Route::get('/estadistica','EstadisticasController@estadisticasDescargas');
 	
 });
 

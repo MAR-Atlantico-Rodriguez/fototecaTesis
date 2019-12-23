@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    
+
                     @if(Session::has('reinicio_clave'))
                         <div class="alert alert-danger  fade in">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -66,7 +66,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
-                                
+
                             </div>
                         </div>
                     </form>
@@ -75,4 +75,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

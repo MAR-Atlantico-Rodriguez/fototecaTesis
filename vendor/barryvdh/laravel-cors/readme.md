@@ -99,15 +99,9 @@ return [
 
 ### Lumen
 
-On Laravel Lumen, load your configuration file manually in `bootstrap/app.php`:
+On Laravel Lumen, load your configuration file manually:
 ```php
 $app->configure('cors');
-```
-
-And register the ServiceProvider:
-
-```php
-$app->register(Barryvdh\Cors\ServiceProvider::class);
 ```
 
 ## Global usage for Lumen
@@ -116,7 +110,7 @@ To allow CORS for all your routes, add the `HandleCors` middleware to the global
 $app->middleware([
     // ...
     \Barryvdh\Cors\HandleCors::class,
-]);
+];
 ```
 
 ## Group middleware for Lumen
@@ -126,7 +120,7 @@ If you want to allow CORS on a specific middleware group or route, add the `Hand
 $app->routeMiddleware([
     // ...
     'cors' => \Barryvdh\Cors\HandleCors::class,
-]);
+];
 ```
 
 ## Common problems and errors (Pre Laravel 5.3)

@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-use App\Imagen;
+use App\Categoria;
+use App\ImagenTags;
 
 class Imagen extends Model{
 	
@@ -16,8 +17,8 @@ class Imagen extends Model{
 
     //Envia el registro de una imagen mediante el ID 
     public function unaImagen($id){
-        return DB::table($this->table) 
-                ->select(DB::raw('users.name, categorias.categoria, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, imagenes.*'))
+    	return DB::table($this->table) 
+                 ->select(DB::raw('users.name, categorias.categoria, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, imagenes.*'))
                 ->join('users', 'users.id', '=', 'imagenes.id_user')
                 ->join('categorias', 'categorias.id', '=', 'imagenes.id_categoria')
                 ->where('imagenes.id',$id) 
@@ -88,25 +89,6 @@ class Imagen extends Model{
             $query->join('imagen_tags', 'id', '=', 'imagen_tags.id_imagen');
             $query->whereIn('imagen_tags.id_tag',  $tags);
         }
-    }
-
-    //Metodos para API
-    public function imagenesInicio_API(){
-        return Imagen::select(DB::raw('imagenes.id, imagenes.titulo, imagenes.descripcion, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, cat.categoria, imagenes.id_categoria'))
-            ->where('repositorio','=',1)
-            ->join('categorias as cat', 'cat.id', '=', 'imagenes.id_categoria')
-            ->inRandomOrder()
-            ->limit(12)
-            ->get();
-    }
-
-    public function imagenesCategoria_API($idCategoria = 0, $tamanioPagina = 0) {
-        return  Imagen::select(DB::raw('imagenes.id, imagenes.titulo, imagenes.descripcion, SUBSTRING_INDEX(imagenes.url, ".", 1) AS urlImg, cat.categoria, imagenes.id_categoria'))
-            ->join('categorias as cat', 'cat.id', '=', 'imagenes.id_categoria')
-            ->where('repositorio','=',1)
-            ->where('imagenes.id_categoria', $idCategoria)
-            ->orderBy('imagenes.created_at','asc')
-            ->paginate($tamanioPagina);
     }
 
 }

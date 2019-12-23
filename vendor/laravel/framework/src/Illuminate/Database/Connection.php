@@ -27,14 +27,14 @@ class Connection implements ConnectionInterface
     /**
      * The active PDO connection.
      *
-     * @var \PDO|\Closure
+     * @var PDO
      */
     protected $pdo;
 
     /**
      * The active PDO connection used for reads.
      *
-     * @var \PDO|\Closure
+     * @var PDO
      */
     protected $readPdo;
 
@@ -490,7 +490,7 @@ class Connection implements ConnectionInterface
                 return true;
             }
 
-            return $this->getPdo()->exec($query) === false ? false : true;
+            return (bool) $this->getPdo()->exec($query);
         });
     }
 
@@ -778,7 +778,7 @@ class Connection implements ConnectionInterface
      * Fire an event for this connection.
      *
      * @param  string  $event
-     * @return array|null
+     * @return void
      */
     protected function fireConnectionEvent($event)
     {
@@ -907,7 +907,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the PDO connection.
      *
-     * @param  \PDO|\Closure|null  $pdo
+     * @param  \PDO|null  $pdo
      * @return $this
      */
     public function setPdo($pdo)
@@ -922,7 +922,7 @@ class Connection implements ConnectionInterface
     /**
      * Set the PDO connection used for reading.
      *
-     * @param  \PDO||\Closure|null  $pdo
+     * @param  \PDO|null  $pdo
      * @return $this
      */
     public function setReadPdo($pdo)
