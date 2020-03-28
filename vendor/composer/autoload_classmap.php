@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Acciones' => $baseDir . '/database/migrations/2020_03_26_232918_acciones.php',
     'Categorias' => $baseDir . '/database/migrations/2017_02_10_014948_categorias.php',
     'CorsKernel' => $vendorDir . '/barryvdh/laravel-cors/tests/CorsKernel.php',
     'CorsServiceTest' => $vendorDir . '/barryvdh/laravel-cors/tests/CorsServiceTest.php',
@@ -90,6 +91,7 @@ return array(
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
     'Imagenes' => $baseDir . '/database/migrations/2017_02_10_015002_imagenes.php',
+    'Logs' => $baseDir . '/database/migrations/2020_03_26_232909_logs.php',
     'MockApp' => $vendorDir . '/barryvdh/laravel-cors/tests/CorsServiceTest.php',
     'OriginMatcherTest' => $vendorDir . '/barryvdh/laravel-cors/tests/OriginMatcherTest.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',

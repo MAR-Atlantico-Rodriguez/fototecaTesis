@@ -351,6 +351,7 @@ class ComposerStaticInitd17ece3fb53781f1b9ae9c50833c6c8c
     );
 
     public static $classMap = array (
+        'Acciones' => __DIR__ . '/../..' . '/database/migrations/2020_03_26_232918_acciones.php',
         'Categorias' => __DIR__ . '/../..' . '/database/migrations/2017_02_10_014948_categorias.php',
         'CorsKernel' => __DIR__ . '/..' . '/barryvdh/laravel-cors/tests/CorsKernel.php',
         'CorsServiceTest' => __DIR__ . '/..' . '/barryvdh/laravel-cors/tests/CorsServiceTest.php',
@@ -435,6 +436,7 @@ class ComposerStaticInitd17ece3fb53781f1b9ae9c50833c6c8c
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
         'Imagenes' => __DIR__ . '/../..' . '/database/migrations/2017_02_10_015002_imagenes.php',
+        'Logs' => __DIR__ . '/../..' . '/database/migrations/2020_03_26_232909_logs.php',
         'MockApp' => __DIR__ . '/..' . '/barryvdh/laravel-cors/tests/CorsServiceTest.php',
         'OriginMatcherTest' => __DIR__ . '/..' . '/barryvdh/laravel-cors/tests/OriginMatcherTest.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',

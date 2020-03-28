@@ -16,7 +16,7 @@
 	<div class="container">
   		<div class="row">
 	    	<div class="col-sm-4" style="border: 1px solid #ccc">
-				    
+
 					<table class="table">
 						<tr>
 							<th>
@@ -28,10 +28,10 @@
 						</tr>
 						<tr>
 							<th>
-								Autor	
+								Autor
 							</th>
 							<td>
-								{{$img->name}}
+								Autor falta
 							</td>
 						</tr>
 						<tr>
@@ -68,17 +68,17 @@
 							</td>
 						</tr>
 					</table>
-						    		
+
 
 	    		@include('fototeca.espacioEnDisco')
 
 		    </div>
 		    <div class="col-sm-8" >
 
-			  
+
 					<img src="{{url(substr($img->url,0,-4).'_we.jpg')}}" id="cropbox" class="img-responsive"/>
-				
-				
+
+
 			</div>
 		</div>
 	</div>
@@ -87,5 +87,5 @@
 
 
 
-	
+
 @endsection

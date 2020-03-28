@@ -12,7 +12,7 @@
 	<div class="container">
   		<div class="row">
 	    	<div class="col-sm-4" style="border: 1px solid #ccc">
-			      
+
 	    		@include('fototeca.categorias')
 
 	    		@include('fototeca.espacioEnDisco')
@@ -38,7 +38,7 @@
 										<th>ID</th>
 										<td>#{{$imagen->id}}</td>
 									</tr>
-									
+
 									<tr>
 										<th>Titulo</th>
 										<td>{{$imagen->titulo}}</td>
@@ -61,20 +61,20 @@
 
 									<tr>
 										<th>Propietario</th>
-										<td>{{$imagen->name}}</td>
+										<td>Falta</td>
 									</tr>
 
 									<tr>
 										<th>Imagen Orientación</th>
 										<td>{{ ($imagen->foto_orientacion)?'Vertical' : 'Horizontal'}}</td>
-										
+
 									</tr>
-									<tr>										
+									<tr>
 										<th>Imagen Color o B/N</th>
 										<td>{{ ($imagen->foto_color)?'Color' : 'Blanco y Negro'}}</td>
 									</tr>
 
-									<tr>										
+									<tr>
 										<th>Repositorio Institucional</th>
 										<td>{{ ($imagen->repositorio)?'SI' : 'NO'}}</td>
 									</tr>
@@ -82,14 +82,14 @@
 									<tr>
 										<th>Acciones</th>
 										<td>
-											
+
 
 											<a href="#" class="btn btn-primary btn-md" title="Descargar imagen" onclick="abrirPopUp({{$imagen->id}},0)">
 												<i class="glyphicon glyphicon-cloud-download"></i>
 												Descarga
 											</a>
 
-											
+
 											<a href="{{url('recortar/'.$imagen->id)}}" class="btn btn-info btn-md" title="Recortar Imagen">
 												<i class="glyphicon glyphicon-scissors"></i>
 												Recortar
@@ -101,13 +101,13 @@
 										<th>Editar - Eliminar</th>
 										<td>
 											<a href="{{url('imagen/edit/'.$imagen->id)}}" class="btn btn-info btn-md" title="Editar Imagen">
-												<i class="glyphicon glyphicon glyphicon-edit"></i>												
-											</a>											
-											<form action="{{url('destroy/'.$imagen->id)}}" 
+												<i class="glyphicon glyphicon glyphicon-edit"></i>
+											</a>
+											<form action="{{url('destroy/'.$imagen->id)}}"
 												  method="POST" style="float: left;margin-right: 5px; width: 40px;">
 								            	{{ csrf_field() }}
-								            	{{ method_field('DELETE') }}				 
-									            <button class="glyphicon glyphicon-remove-circle btn btn-danger" 
+								            	{{ method_field('DELETE') }}
+									            <button class="glyphicon glyphicon-remove-circle btn btn-danger"
 									            		title="Eliminar la imagen de la WEB">
 									            </button>
 								    	    </form>
@@ -116,9 +116,9 @@
 									</tr>
 									@endif
 
-									
 
-									<tr>										
+
+									<tr>
 										<th>TAG's</th>
 										<td>
 											<ul style="margin-left: -30px">
@@ -135,9 +135,9 @@
 
 
 							<td class="col-sm-5">
-								
+
 								<img src="../{{$imagen->urlImg}}_th.jpg" class="img-responsive img-thumbnail">
-								
+
 								<hr>
 
 								@if($prevSig->anterior > 0)
@@ -154,32 +154,32 @@
 						</tr>
 					</table>
 
-				</div>	
+				</div>
 
 				<div class="col-sm-12">
 					@if(count($recortes))
 						<h2>Recortes</h2>
-						<hr>						
+						<hr>
 						@foreach($recortes as $r)
 							<div class="col-md-4">
 								<a onclick="abrirPopUp({{$r->id}},1)" title="DESCARGAR IMAGEN RECORTADA" style="cursor:pointer">
-				          			<img src="{{ url($r->url) }}" 
-				          				 width="150px" 
-				          				 height="120px" 
-				          				 alt="{{$r->name}}" 
+				          			<img src="{{ url($r->url) }}"
+				          				 width="150px"
+				          				 height="120px"
+				          				 alt=""
 				          				 class="img-rounded">
 				            		<div class="caption">
-				              			<b>Usuario: {{$r->name}}</b>
+				              			<b>Usuario: </b>
 				              			<br>
 				              			<b>Fecha: {{Carbon\Carbon::parse($r->created_at)->format('d/m/Y H:i:s') }}</b>
 				            		</div>
 				            	</a>
-					        	
+
 					      	</div>
-							
+
 						@endforeach
 					@endif
-				</div>	    	
+				</div>
 			</div>
 		</div>
 	</div>
@@ -212,12 +212,12 @@
       			<tr id="selectFW">
       				<th>Tamaño de Imagen</th>
       				<td>
-      					<select id="tamImg"> 
+      					<select id="tamImg">
       						<option value="1">
-      							Imagen Web 
+      							Imagen Web
       						</option>
       						<option value="0">
-      							Imagen Full 
+      							Imagen Full
       						</option>
       					</select>
       				</td>
@@ -226,14 +226,14 @@
       			<tr>
       				<th>Marca de Agua</th>
       				<td>
-      					 <input type="checkbox" 
-				                id="checkImgAgua" 
-				                value="1" 
+      					 <input type="checkbox"
+				                id="checkImgAgua"
+				                value="1"
 				                onclick="$('#imgAgua').toggle()">
       				</td>
       			</tr>
       		</table>
-      		
+
       		<hr>
 
       		<table id="imgAgua" class="table table-striped table-responsive" style="display:none">
@@ -280,7 +280,7 @@
       						<option value="8" selected="">Abajo a la Derecha</option>
       					</select>
       				</td>
-      			</tr>      			
+      			</tr>
       		</table>
       		<input type="hidden" id="url" value='{{ url("") }}'>
       		<input type="hidden" id="id">
@@ -304,7 +304,7 @@
 
 	function opacasion(op){
 		$('#range').html(op);
-		document.getElementById("imgPreview").style.opacity = op*0.01;	
+		document.getElementById("imgPreview").style.opacity = op*0.01;
 	}
 
 	function descargar(){
@@ -319,8 +319,8 @@
 		var tamImg = $("#tamImg").val(); //1 WEB - 0 FULL
 
 		//console.log(posicion);
-		
-		location.href = url+"/descargarImagen/"+id+"/"+imgRecorte+"/"+posicion+"/"+logo+"/"+opacity+"/"+tamImg;		
+
+		location.href = url+"/descargarImagen/"+id+"/"+imgRecorte+"/"+posicion+"/"+logo+"/"+opacity+"/"+tamImg;
 	}
 
 	function abrirPopUp(id,imgRecorte){

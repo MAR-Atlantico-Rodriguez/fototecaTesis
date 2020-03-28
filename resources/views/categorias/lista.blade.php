@@ -18,7 +18,7 @@
 		    <div class="col-md-10 col-md-offset-1" >
 		    	<div class="panel panel-default">
 	                <div class="panel-heading">
-	                	
+
 	                	@if($categoriaPadre)
 		                	<div class="pull-left" style="margin-right: 10px;">
 		                		<a href="{{url('categorias/lista/'.$idCategoriaPadre)}}" class="btn btn-success btn-xs" title="Volver a la Categoria padre">
@@ -44,17 +44,17 @@
 								<thead>
 									<tr>
 										<th>#ID</th>
-										<th>Categoria</th>										
+										<th>Categoria</th>
 										<th>Sub Categorias</th>
 										<th>Imagenes</th>
-										<th>Usuario</th>
+										<!--th>Usuario</th>
 										<!--th>Fecha Cración</th>
 										<th>Fecha Modificación</th-->
 										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
-								
+
 								@foreach ($categorias_padres as $c)
 									<tr>
 										<td>{{ $c->id }}</td>
@@ -69,12 +69,12 @@
 										</td>
 										<td><center>{{$c->cantSubCat}}</center></td>
 										<td><center>{{$c->cantImagen}}</center></td>
-										<td>{{ $c->name }}</td>
+
 										<!--td>{{ $c->created_at }}</td>
 										<td>{{ $c->updated_at }}</td-->
 										<td>
-											
-											
+
+
 											<a href="{{url('categorias/formulario/'.$c->id_padre.'/'.$c->id)}}" class="btn btn-primary" title="Editar TAG">
 												<i class="glyphicon glyphicon-edit"></i>
 											</a>
@@ -97,14 +97,14 @@
 													<input type="hidden" name="idCategoria" value="{{ $c->id }}">
 				                                    {{ csrf_field() }}
 				                                </form>
-											@endif	
+											@endif
 										</td>
-										
+
 									</tr>
 								@endforeach
 
 								</tbody>
-								
+
 							</table>
 						</div>
 					</div>
@@ -118,5 +118,5 @@
 
 
 
-	
+
 @endsection

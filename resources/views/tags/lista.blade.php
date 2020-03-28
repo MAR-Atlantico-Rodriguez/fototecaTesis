@@ -18,9 +18,9 @@
 		    <div class="col-md-10 col-md-offset-1" >
 		    	<div class="panel panel-default">
 	                <div class="panel-heading">
-	                	
+
 	                		TAGS - Fototeca
-	                	
+
 	                	<div class="pull-right">
 	                		<a href="{{ url('tags/newTag') }}" class="btn btn-success btn-xs" title="Nuevo TAG">
 								<span class="glyphicon glyphicon-plus"></span>
@@ -36,8 +36,8 @@
 									<tr>
 										<th>#ID</th>
 										<th>Tags</th>
-										
-										<th>Usuario</th>
+
+										<!--th>Usuario</th-->
 										<th>Fecha Cración</th>
 										<th>Fecha Modificación</th>
 										<th>Acciones</th>
@@ -48,7 +48,6 @@
 									<tr>
 										<td>{{ $tag->id }}</td>
 										<td>{{ $tag->tag }}</td>
-										<td>{{ $tag->users->name }}</td>
 										<td>{{ $tag->created_at }}</td>
 										<td>{{ $tag->updated_at }}</td>
 										<td>
@@ -74,13 +73,13 @@
 													<input type="hidden" name="idTag" value="{{ $tag->id }}">
 				                                    {{ csrf_field() }}
 				                                </form>
-											@endif	
+											@endif
 										</td>
-										
+
 									</tr>
 								@endforeach
 								</tbody>
-								
+
 							</table>
 						</div>
 					</div>
@@ -94,5 +93,5 @@
 
 
 
-	
+
 @endsection

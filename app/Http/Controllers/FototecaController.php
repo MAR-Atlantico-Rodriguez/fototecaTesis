@@ -80,7 +80,7 @@ class FototecaController extends Controller {
 
 		$Categoria->categoria = $categoria;
 		$Categoria->id_padre = $categoriaPadre;
-		$Categoria->id_users = Auth::user()->id;
+		// $Categoria->id_users = Auth::user()->id;
 		if ($Categoria->save()) {
 			if ($id == 0) {
 				//Creo una carpeta para la categoria creada
@@ -186,7 +186,7 @@ class FototecaController extends Controller {
 					//Guardo en Base de datos!
 					$imagen = new Imagen();
 					$imagen->id_categoria = $id_categoria;
-					$imagen->id_user = Auth::user()->id;
+					// $imagen->id_user = Auth::user()->id;
 					$imagen->titulo = request()->input('titulo');
 					$imagen->descripcion = request()->input('descripcion');
 					$imagen->foto_orientacion = $vertical_horizontal;
@@ -201,8 +201,8 @@ class FototecaController extends Controller {
 						//Guardo los TAGS de la imagen
 						foreach (request()->input('tags') as $Tk => $Tv) {
 							$array = array('id_imagen' => $imagen->id,
-								'id_tag' => $Tv,
-								'id_users' => Auth::user()->id);
+								'id_tag' => $Tv);
+							// 'id_users' => Auth::user()->id);
 							ImagenTag::create($array);
 						}
 					}
@@ -287,7 +287,7 @@ class FototecaController extends Controller {
 		$imgDesc = new imagenDescarga();
 		$imgDesc->id_imagen = $idImagen;
 		$imgDesc->id_imagen_recorte = ($imgORec === '1') ? $id : 0;
-		$imgDesc->id_users = (empty(Auth::user()->id)) ? 0 : Auth::user()->id;
+		// $imgDesc->id_users = (empty(Auth::user()->id)) ? 0 : Auth::user()->id;
 		$imgDesc->save();
 		return response()->download($pathtoFile);
 	}
@@ -389,8 +389,8 @@ class FototecaController extends Controller {
 			//Guardo los TAGS de la imagen
 			foreach ($r->input('tags') as $Tk => $Tv) {
 				$array = array('id_imagen' => $imagen->id,
-					'id_tag' => $Tv,
-					'id_users' => Auth::user()->id);
+					'id_tag' => $Tv);
+				// 'id_users' => Auth::user()->id);
 				ImagenTag::create($array);
 			}
 		}
@@ -471,7 +471,7 @@ class FototecaController extends Controller {
 
 		$recorte = new Recorte();
 		$recorte->id_imagen = $r->id;
-		$recorte->id_user = Auth::user()->id;
+		// $recorte->id_user = Auth::user()->id;
 		$recorte->url = 'public/' . $ruta;
 		$save = $recorte->save();
 
