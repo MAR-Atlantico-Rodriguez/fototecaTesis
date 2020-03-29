@@ -4,8 +4,10 @@ namespace App;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Imagen extends Model {
+	use SoftDeletes;
 
 	protected $table = "imagenes";
 
@@ -84,6 +86,10 @@ class Imagen extends Model {
 			$query->join('imagen_tags', 'id', '=', 'imagen_tags.id_imagen');
 			$query->whereIn('imagen_tags.id_tag', $tags);
 		}
+	}
+
+	public function logs() {
+		return $this->hasMany('App\LogsMio');
 	}
 
 }

@@ -16,6 +16,7 @@ class CreateTagsTable extends Migration {
 			$table->string('tag');
 			$table->integer('block')->default(1); //1 desbloqueado 0 bloqueado
 			$table->timestamps();
+			$table->softDeletes();
 
 		});
 	}

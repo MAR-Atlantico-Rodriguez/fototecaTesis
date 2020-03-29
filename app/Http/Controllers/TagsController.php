@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\ImagenTag;
+use App\LogsMio;
 use App\Tag;
+use Auth;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller {
@@ -39,13 +41,17 @@ class TagsController extends Controller {
 		if ($r->id == 0) {
 			//Nuevo TAG
 			$tag = new Tag();
+			$createUpdate = 1;
 			// $tag->id_users = Auth::user()->id;
 		} else {
-//Edita el TAG
+			//Edita el TAG
 			$tag = Tag::find($r->id);
+			$createUpdate = 3;
 		}
 		$tag->tag = $r->tag;
 		$tag->save();
+
+		LogsMio::insertLog($createUpdate, Auth::user()->id, 'tags', $tag->id);
 
 		return redirect('tags/lista');
 	}

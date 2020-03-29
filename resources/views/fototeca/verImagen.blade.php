@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('title',$imagen->titulo)
 
@@ -12,12 +13,13 @@
 	<div class="container">
   		<div class="row">
 	    	<div class="col-sm-4" style="border: 1px solid #ccc">
-
 	    		@include('fototeca.categorias')
 
 	    		@include('fototeca.espacioEnDisco')
 
 		    </div>
+
+
 
 		    <div class="col-sm-8"  id="inicio">
 		    	@if(Session::has('edit_imagen'))
@@ -58,12 +60,12 @@
 										<th>Categoria</th>
 										<td>{{$imagen->categoria}} </td>
 									</tr>
-
+									@if(count($imagen->log))
 									<tr>
 										<th>Propietario</th>
-										<td>Falta</td>
+										<td>{{$imagen->log[0]->name}}</td>
 									</tr>
-
+									@endif
 									<tr>
 										<th>Imagen Orientación</th>
 										<td>{{ ($imagen->foto_orientacion)?'Vertical' : 'Horizontal'}}</td>
@@ -96,25 +98,26 @@
 											</a>
 										</td>
 									</tr>
-									@if (Auth::user()->perfil)
+
 									<tr>
 										<th>Editar - Eliminar</th>
 										<td>
 											<a href="{{url('imagen/edit/'.$imagen->id)}}" class="btn btn-info btn-md" title="Editar Imagen">
 												<i class="glyphicon glyphicon glyphicon-edit"></i>
 											</a>
-											<form action="{{url('destroy/'.$imagen->id)}}"
-												  method="POST" style="float: left;margin-right: 5px; width: 40px;">
-								            	{{ csrf_field() }}
-								            	{{ method_field('DELETE') }}
-									            <button class="glyphicon glyphicon-remove-circle btn btn-danger"
-									            		title="Eliminar la imagen de la WEB">
-									            </button>
-								    	    </form>
-
+											@if (Auth::user()->perfil)
+												<form action="{{url('destroy/'.$imagen->id)}}"
+													  method="POST" style="float: left;margin-right: 5px; width: 40px;">
+									            	{{ csrf_field() }}
+									            	{{ method_field('DELETE') }}
+										            <button class="glyphicon glyphicon-remove-circle btn btn-danger"
+										            		title="Eliminar la imagen de la WEB">
+										            </button>
+									    	    </form>
+								    	    @endif
 										</td>
 									</tr>
-									@endif
+
 
 
 
@@ -150,6 +153,28 @@
 										<i class="glyphicon glyphicon-hand-right"></i>
 									</a>
 								@endif
+
+
+
+									<hr>
+									@if(count($imagen->log) > 1)
+									<h3>Ediciones</h3>
+									<table class="table">
+										<tr>
+											<th>Nombre</th>
+											<th>Fecha</th>
+										</tr>
+
+										@foreach($imagen->log as $v)
+											@if($v->descripcion == 'Edicion')
+												<tr>
+													<td>{{$v->name}}</td>
+													<td>{{$v->updated_at->format("d/m/yy")}}</td>
+												</tr>
+											@endif
+										@endforeach
+									</table>
+									@endif
 							</td>
 						</tr>
 					</table>

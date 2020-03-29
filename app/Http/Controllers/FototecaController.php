@@ -6,6 +6,7 @@ use App\Categoria;
 use App\Imagen;
 use App\imagenDescarga;
 use App\ImagenTag;
+use App\LogsMio;
 use App\Recorte;
 use App\User;
 use Auth;
@@ -196,14 +197,20 @@ class FototecaController extends Controller {
 
 					$imagen->fecha = request()->input('fecha');
 					$save = $imagen->save();
+					// Guardo en la tabla LOG quien Crea
+					LogsMio::insertLog(1, Auth::user()->id, 'imagenes', $imagen->id, $imagen->id);
 
 					if ($save) {
 						//Guardo los TAGS de la imagen
+						$array = [];
 						foreach (request()->input('tags') as $Tk => $Tv) {
-							$array = array('id_imagen' => $imagen->id,
-								'id_tag' => $Tv);
+							$a = array('id_imagen' => $imagen->id, 'id_tag' => $Tv);
 							// 'id_users' => Auth::user()->id);
-							ImagenTag::create($array);
+							$array[] = $a;
+						}
+						// dd($array);
+						if (count($array)) {
+							ImagenTag::insert($array);
 						}
 					}
 
@@ -219,6 +226,16 @@ class FototecaController extends Controller {
 
 		$rec = new Recorte();
 		$recortes = $rec->recortesDeUnaImagen($id);
+
+		$log = LogsMio::select('logs.updated_at', 'users.name', 'acciones.descripcion')
+			->where('id_imagen', $id)
+			->orWhere('id_accion', 3)
+			->join('users', 'users.id', '=', 'logs.id_user')
+			->join('acciones', 'acciones.id', '=', 'logs.id_accion')
+			->get();
+		///dd($log);
+
+		$imagen[0]->log = $log;
 
 		return view('fototeca/verImagen', [
 			"categorias" => $this->getCategories(),
@@ -385,6 +402,8 @@ class FototecaController extends Controller {
 		$imagen->fecha = $r->input('fecha');
 		$save = $imagen->save();
 
+		$log = LogsMio::insertLog(3, auth()->user()->id, 'imagenes');
+
 		if ($save && is_array($r->input('tags'))) {
 			//Guardo los TAGS de la imagen
 			foreach ($r->input('tags') as $Tk => $Tv) {
@@ -392,6 +411,7 @@ class FototecaController extends Controller {
 					'id_tag' => $Tv);
 				// 'id_users' => Auth::user()->id);
 				ImagenTag::create($array);
+				$log = LogsMio::insertLog(1, auth()->user()->id, 'tags');
 			}
 		}
 

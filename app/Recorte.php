@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Recorte extends Model {
+
 	protected $table = "recortes";
 
 	protected $fillable = [

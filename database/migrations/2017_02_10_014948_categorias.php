@@ -17,12 +17,12 @@ class Categorias extends Migration {
 			$table->string('categoria', 100);
 			$table->integer('block')->default(1); //1 desbloqueado 0 bloqueado
 			$table->timestamps();
+			$table->softDeletes();
 		});
 
 		$procedure = "
             CREATE PROCEDURE `categoriasLista` (IN `_id` INT(11))
-            SELECT C.*, U.name,  (select count(*) from imagenes AS I where I.id_categoria = C.id) AS cantImagen, (select count(*) from categorias AS CC where CC.id_padre = C.id) AS cantSubCat FROM categorias AS C
-            left JOIN users AS U ON U.id = C.id_users
+            SELECT C.*,  (select count(*) from imagenes AS I where I.id_categoria = C.id) AS cantImagen, (select count(*) from categorias AS CC where CC.id_padre = C.id) AS cantSubCat FROM categorias AS C
             where C.id_padre = _id";
 
 		DB::unprepared("DROP procedure IF EXISTS categoriasLista");

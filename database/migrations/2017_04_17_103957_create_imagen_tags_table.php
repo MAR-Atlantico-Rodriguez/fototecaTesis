@@ -12,12 +12,13 @@ class CreateImagenTagsTable extends Migration {
 	 */
 	public function up() {
 		Schema::create('imagen_tags', function (Blueprint $table) {
+			$table->increments('id');
 			$table->integer('id_imagen')->unsigned();
 			$table->integer('id_tag')->unsigned();
 
 			$table->timestamps();
 
-			$table->primary(['id_imagen', 'id_tag']);
+			// $table->primary(['id_imagen', 'id_tag']);
 			$table->foreign('id_imagen')->references('id')->on('imagenes');
 			$table->foreign('id_tag')->references('id')->on('tags');
 		});

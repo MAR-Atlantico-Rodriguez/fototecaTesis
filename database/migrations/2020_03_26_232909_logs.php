@@ -16,10 +16,10 @@ class Logs extends Migration {
 			$table->integer('id_accion')->unsigned();
 			$table->integer('id_user')->unsigned();
 
-			$table->integer('id_imagen');
-			$table->integer('id_recorte');
-			$table->integer('id_tag');
-			$table->integer('id_categorias');
+			$table->integer('id_imagen')->default(0);
+			$table->integer('id_recorte')->default(0);
+			$table->integer('id_tag')->default(0);
+			$table->integer('id_categorias')->default(0);
 
 			$table->timestamps();
 

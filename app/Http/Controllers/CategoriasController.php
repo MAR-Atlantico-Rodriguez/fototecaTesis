@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\LogsMio;
+use Auth;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller {
@@ -69,16 +71,19 @@ class CategoriasController extends Controller {
 		//Crea una categoria
 		if ($id == 0) {
 			$Categoria = new Categoria;
+			$createUpdate = 1;
 		}
 		//Edita la categoria
 		else {
 			$Categoria = Categoria::find($id);
+			$createUpdate = 3;
 		}
 
 		$Categoria->categoria = $categoria;
 		$Categoria->id_padre = $categoriaPadre;
 		// $Categoria->id_users = Auth::user()->id;
 		if ($Categoria->save()) {
+			LogsMio::insertLog($createUpdate, Auth::user()->id, 'categorias', $Categoria->id);
 			if ($id == 0) {
 				//Creo una carpeta para la categoria creada
 				mkdir(public_path("imagenes/" . $Categoria->id), 0777);

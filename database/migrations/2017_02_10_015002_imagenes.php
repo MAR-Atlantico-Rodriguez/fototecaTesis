@@ -25,6 +25,7 @@ class Imagenes extends Migration {
 
 			$table->string('url', 191);
 			$table->timestamps();
+			$table->softDeletes();
 
 			$table->foreign('id_categoria')->references('id')->on('categorias');
 
