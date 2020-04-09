@@ -31,157 +31,151 @@
 				@endif
 		    	<h2><a href="{{url('galeria/'.$imagen->id_categoria)}}" class="btn btn-success btn-xs" title="Volver a la Galeria"><i class="glyphicon glyphicon-arrow-left"></i></a> | {{$imagen->titulo}}</h2>
 		    	<br>
-		    	<div class="table-responsive">
-					<table class="table">
-						<tr>
-							<td class="col-sm-7">
-								<table class="table table-striped">
-									<tr>
-										<th>ID</th>
-										<td>#{{$imagen->id}}</td>
-									</tr>
+		    	<div>
 
-									<tr>
-										<th>Titulo</th>
-										<td>{{$imagen->titulo}}</td>
-									</tr>
+		    		<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 
-									<tr>
-										<th>Descripción</th>
-										<td>{{$imagen->descripcion}}</td>
-									</tr>
+		    			<table class="table table-striped">
 
-									<tr>
-										<th>Fecha de carga</th>
-										<td>{{Carbon\Carbon::parse($imagen->fecha)->format('d/m/Y')}}</td>
-									</tr>
+							<tr>
+								<th>Titulo</th>
+								<td>{{$imagen->titulo}}</td>
+							</tr>
 
-									<tr>
-										<th>Categoria</th>
-										<td>{{$imagen->categoria}} </td>
-									</tr>
-									@if(count($imagen->log))
-									<tr>
-										<th>Propietario</th>
-										<td>{{$imagen->log[0]->name}}</td>
-									</tr>
-									@endif
-									<tr>
-										<th>Imagen Orientación</th>
-										<td>{{ ($imagen->foto_orientacion)?'Vertical' : 'Horizontal'}}</td>
+							<tr>
+								<th>Descripción</th>
+								<td>{{$imagen->descripcion}}</td>
+							</tr>
 
-									</tr>
-									<tr>
-										<th>Imagen Color o B/N</th>
-										<td>{{ ($imagen->foto_color)?'Color' : 'Blanco y Negro'}}</td>
-									</tr>
+							<tr>
+								<th>Fecha de carga</th>
+								<td>{{Carbon\Carbon::parse($imagen->fecha)->format('d/m/Y')}}</td>
+							</tr>
 
-									<tr>
-										<th>Repositorio Institucional</th>
-										<td>{{ ($imagen->repositorio)?'SI' : 'NO'}}</td>
-									</tr>
+							<tr>
+								<th>Categoria</th>
+								<td>{{$imagen->categoria}} </td>
+							</tr>
+							@if(count($imagen->log))
+							<tr>
+								<th>Propietario</th>
+								<td>{{$imagen->log[0]->name}}</td>
+							</tr>
+							@endif
+							<tr>
+								<th>Imagen Orientación</th>
+								<td>{{ ($imagen->foto_orientacion)?'Vertical' : 'Horizontal'}}</td>
 
-									<tr>
-										<th>Acciones</th>
-										<td>
+							</tr>
+							<tr>
+								<th>Imagen Color o B/N</th>
+								<td>{{ ($imagen->foto_color)?'Color' : 'Blanco y Negro'}}</td>
+							</tr>
+
+							<tr>
+								<th>Repositorio Institucional</th>
+								<td>{{ ($imagen->repositorio)?'SI' : 'NO'}}</td>
+							</tr>
+
+							<tr>
+								<th>Acciones</th>
+								<td>
 
 
-											<a href="#" class="btn btn-primary btn-md" title="Descargar imagen" onclick="abrirPopUp({{$imagen->id}},0)">
-												<i class="glyphicon glyphicon-cloud-download"></i>
-												Descarga
-											</a>
-
-
-											<a href="{{url('recortar/'.$imagen->id)}}" class="btn btn-info btn-md" title="Recortar Imagen">
-												<i class="glyphicon glyphicon-scissors"></i>
-												Recortar
-											</a>
-										</td>
-									</tr>
-
-									<tr>
-										<th>Editar - Eliminar</th>
-										<td>
-											<a href="{{url('imagen/edit/'.$imagen->id)}}" class="btn btn-info btn-md" title="Editar Imagen">
-												<i class="glyphicon glyphicon glyphicon-edit"></i>
-											</a>
-											@if (Auth::user()->perfil)
-												<form action="{{url('destroy/'.$imagen->id)}}"
-													  method="POST" style="float: left;margin-right: 5px; width: 40px;">
-									            	{{ csrf_field() }}
-									            	{{ method_field('DELETE') }}
-										            <button class="glyphicon glyphicon-remove-circle btn btn-danger"
-										            		title="Eliminar la imagen de la WEB">
-										            </button>
-									    	    </form>
-								    	    @endif
-										</td>
-									</tr>
-
-
-
-
-									<tr>
-										<th>TAG's</th>
-										<td>
-											<ul style="margin-left: -30px">
-												@foreach($tags as $v)
-													<li><i>#{{ $v->tag }}</i></li>
-												@endforeach
-											</ul>
-										</td>
-									</tr>
-								</table>
-							</td>
-
-
-
-
-							<td class="col-sm-5">
-
-								<img src="../{{$imagen->urlImg}}_th.jpg" class="img-responsive img-thumbnail">
-
-								<hr>
-
-								@if($prevSig->anterior > 0)
-									<a href="{{ url('verImagen/'.$prevSig->anterior) }}" class="btn btn-warning" title="Imagen Anterior">
-										<i class="glyphicon glyphicon-hand-left"></i>
+									<a href="#" class="btn btn-primary btn-md" title="Descargar imagen" onclick="abrirPopUp({{$imagen->id}},0)">
+										<i class="glyphicon glyphicon-cloud-download"></i>
+										Descarga
 									</a>
-								@endif
-								@if($prevSig->posterior > 0)
-									<a href="{{ url('verImagen/'.$prevSig->posterior) }}" class="btn btn-warning pull-right" title="Imagen Posterior">
-										<i class="glyphicon glyphicon-hand-right"></i>
+
+									<br><br>
+
+									<a href="{{url('recortar/'.$imagen->id)}}" class="btn btn-info btn-md" title="Recortar Imagen">
+										<i class="glyphicon glyphicon-scissors"></i>
+										Recortar
 									</a>
-								@endif
+								</td>
+							</tr>
+
+							<tr>
+								<th>Editar - Eliminar</th>
+								<td>
+									<a href="{{url('imagen/edit/'.$imagen->id)}}" class="btn btn-info btn-md" title="Editar Imagen">
+										<i class="glyphicon glyphicon glyphicon-edit"></i>
+									</a>
+									@if (Auth::user()->perfil)
+										<form action="{{url('destroy/'.$imagen->id)}}"
+											  method="POST" style="float: left;margin-right: 5px; width: 40px;">
+							            	{{ csrf_field() }}
+							            	{{ method_field('DELETE') }}
+								            <button class="glyphicon glyphicon-remove-circle btn btn-danger"
+								            		title="Eliminar la imagen de la WEB">
+								            </button>
+							    	    </form>
+						    	    @endif
+								</td>
+							</tr>
 
 
 
-									<hr>
-									@if(count($imagen->log) > 1)
-									<h3>Ediciones</h3>
-									<table class="table">
-										<tr>
-											<th>Nombre</th>
-											<th>Fecha</th>
-										</tr>
 
-										@foreach($imagen->log as $v)
-											@if($v->descripcion == 'Edicion')
-												<tr>
-													<td>{{$v->name}}</td>
-													<td>{{$v->updated_at->format("d/m/yy")}}</td>
-												</tr>
-											@endif
+							<tr>
+								<th>TAG's</th>
+								<td>
+									<ul style="margin-left: -30px">
+										@foreach($tags as $v)
+											<li><i>#{{ $v->tag }}</i></li>
 										@endforeach
-									</table>
-									@endif
-							</td>
-						</tr>
-					</table>
+									</ul>
+								</td>
+							</tr>
+						</table>
+
+		    		</div>
+
+		    		<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+		    			<img src="../{{$imagen->urlImg}}_th.jpg" class="img-responsive img-thumbnail" style="max-height: 400px">
+
+						<hr>
+
+						@if($prevSig->anterior > 0)
+							<a href="{{ url('verImagen/'.$prevSig->anterior) }}" class="btn btn-warning" title="Imagen Anterior">
+								<i class="glyphicon glyphicon-hand-left"></i>
+							</a>
+						@endif
+						@if($prevSig->posterior > 0)
+							<a href="{{ url('verImagen/'.$prevSig->posterior) }}" class="btn btn-warning pull-right" title="Imagen Posterior">
+								<i class="glyphicon glyphicon-hand-right"></i>
+							</a>
+						@endif
+
+
+
+						<hr>
+						@if(count($imagen->log) > 1)
+						<h3>Ediciones</h3>
+						<table class="table">
+							<tr>
+								<th>Nombre</th>
+								<th>Fecha</th>
+							</tr>
+
+							@foreach($imagen->log as $v)
+								@if($v->descripcion == 'Edicion')
+									<tr>
+										<td>{{$v->name}}</td>
+										<td>{{$v->updated_at->format("d/m/yy")}}</td>
+									</tr>
+								@endif
+							@endforeach
+						</table>
+						@endif
+
+		    		</div>
+
 
 				</div>
 
-				<div class="col-sm-12">
+				<div class="col-sm-12" style="border-top: 1px dashed #777">
 					@if(count($recortes))
 						<h2>Recortes</h2>
 						<hr>

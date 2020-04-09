@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use App\Imagen;
-use App\imagenDescarga;
 use App\ImagenTag;
 use App\LogsMio;
 use App\Recorte;
@@ -275,8 +274,14 @@ class FototecaController extends Controller {
 		}
 
 		$posiciones = ["top-left", "top", "top-right", "left", "center", "right", "bottom-left", "bottom", "bottom-right"];
-		//Temporal linux
-		$pathTmp = '/tmp/' . md5($url[0]->url) . '.jpg';
+
+		if (PHP_OS != 'WINNT') {
+			//Temporal Linux
+			$pathTmp = '/tmp/' . md5($url[0]->url) . '.jpg';
+		} else {
+			//Temporal Windows
+			$pathTmp = sys_get_temp_dir() . '/' . md5($url[0]->url) . '.jpg';
+		}
 
 		$img = Image::make($uri)->encode('jpg');
 
@@ -298,15 +303,12 @@ class FototecaController extends Controller {
 
 		$img->save($pathTmp);
 
-		$pathtoFile = $pathTmp;
+		$idImagen = ($imgORec == '0') ? $id : Recorte::find($id)->id_imagen;
+		$tablaLog = ($imgORec === '0') ? 'imagenes' : 'recortes';
 
-		$idImagen = ($imgORec == '0') ? Imagen::find($id)->id : Recorte::find($id)->id_imagen;
-		$imgDesc = new imagenDescarga();
-		$imgDesc->id_imagen = $idImagen;
-		$imgDesc->id_imagen_recorte = ($imgORec === '1') ? $id : 0;
-		// $imgDesc->id_users = (empty(Auth::user()->id)) ? 0 : Auth::user()->id;
-		$imgDesc->save();
-		return response()->download($pathtoFile);
+		$imgDesc = LogsMio::insertLog(4, Auth::user()->id, $tablaLog, $idImagen);
+
+		return response()->download($pathTmp);
 	}
 
 	//Vista de una galeria
